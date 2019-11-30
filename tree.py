@@ -12,7 +12,22 @@ class BinaryTree:
 
         self.right = None
         self.left = None  
-                
+
+
+    def find(self, id):
+        search = None
+        if self.data.id == id:
+            return self.data
+        if self.left is not None:
+            if self.left.data.id == id:
+                return self.left.data
+            search = self.left.find(id)
+        if self.right is not None:
+            if self.right.data.id == id:
+                return self.right.data
+            search = self.right.find(id)
+        return search
+
 
     def insert(self, newData):
         if self.data:
@@ -52,4 +67,9 @@ people.insert(Grandpa)
 people.insert(Yana)
 people.insert(Baba)
 
-people.PrintTree()
+result = people.find(int(input("ID to find: ")))
+if result:
+    print(f"---\nID: {result.id}\nNAME: {result.name}\nNICKNAME: {result.nickname}")
+else:
+    print("Not found.")
+# people.PrintTree()
