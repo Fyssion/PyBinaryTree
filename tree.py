@@ -4,6 +4,9 @@ class Human:
         self.name = name
         self.nickname = nickname
 
+class CannotInsert(Exception):
+    pass
+
 # BinaryTree class 
 class BinaryTree: 
    
@@ -39,6 +42,10 @@ class BinaryTree:
 
 
     def insert(self, newData):
+        if self.find(newData.id) is not None:
+            # raise CannotInsert(f"Duplication Error: '{newData.id} - {newData.name}' could not be inserted. There is already a node with this ID!")
+            return print(f"CannotInsert: There is already a node with an ID of {newData.id}")
+
         if self.data:
 
             if newData.id < self.data.id:
@@ -83,6 +90,8 @@ Caleb = Human(5, "Caleb", "clam")
 Grandpa = Human(8, "Grandpa", "bmw")
 Yana = Human(4, "Yana", "yoyoyana")
 Baba = Human(11, "Baba", "I can't think of a nickname for Baba")
+Mom = Human(4, "Mom", "Ma")
+
 
 
 people = BinaryTree()
@@ -91,6 +100,7 @@ people.insert(Caleb)
 people.insert(Grandpa)
 people.insert(Yana)
 people.insert(Baba)
+people.insert(Mom)
 
 people.PrintTree()
 
