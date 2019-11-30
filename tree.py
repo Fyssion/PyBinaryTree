@@ -89,8 +89,9 @@ class BinaryTree:
 Caleb = Human(5, "Caleb", "clam")
 Grandpa = Human(8, "Grandpa", "bmw")
 Yana = Human(4, "Yana", "yoyoyana")
-Baba = Human(11, "Baba", "I can't think of a nickname for Baba")
-Mom = Human(4, "Mom", "Ma")
+Baba = Human(6, "Baba", "I can't think of a nickname for Baba")
+Mom = Human(11, "Mom", "Ma")
+Dad = Human(2, "Dad", "Da")
 
 
 
@@ -101,6 +102,7 @@ people.insert(Grandpa)
 people.insert(Yana)
 people.insert(Baba)
 people.insert(Mom)
+people.insert(Dad)
 
 people.PrintTree()
 
