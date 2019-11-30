@@ -23,22 +23,40 @@ class BinaryTree:
 
         search = None
 
-        if self.data.id == id:
-            return self.data
-
-        if self.left is not None:
-            if self.left.data.id == id:
-                return self.left.data
-
-            search = self.left.find(id)
-
-        if self.right is not None:
-            if self.right.data.id == id:
-                return self.right.data
-                
-            search = self.right.find(id)
+        if id > self.data.id:
+            if self.right is not None:
+                search = self.right.find(id)
+            else:
+                return None
+        elif id < self.data.id:
+            if self.left is not None:
+                search = self.left.find(id)
+            else:
+                return None
+        if id == self.data.id:
+            search = self.data
 
         return search
+        
+        # OLD find() function
+        # search = None
+
+        # if self.data.id == id:
+        #     return self.data
+
+        # if self.left is not None:
+        #     if self.left.data.id == id:
+        #         return self.left.data
+
+        #     search = self.left.find(id)
+
+        # if self.right is not None:
+        #     if self.right.data.id == id:
+        #         return self.right.data
+                
+        #     search = self.right.find(id)
+
+        # return search
 
 
     def insert(self, newData):
