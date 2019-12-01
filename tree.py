@@ -10,8 +10,19 @@ class CannotInsert(Exception):
 
 # BinaryTree class 
 class BinaryTree: 
+    """
+    Binary Tree that contains nodes.
+
+    Once initiated, the binary tree remains empty until a node is inserted.
+    A node is inserted/sorted with its ID.
+
+    You can insert, delete, replace, or find a node in the binary tree.
+    You can print the entire binary tree from left to right with print_tree().
+    """
    
-    def __init__(self): 
+    def __init__(self):
+        """Initiate the tree. Tree is empty until a node is inserted."""
+
         self.data = None 
 
         self.right = None
@@ -19,6 +30,13 @@ class BinaryTree:
 
 
     def find(self, id):
+        """
+        Find a node in the tree. Returns node or None if not found.
+        
+        Parameters:
+        -ID: The ID of the node you want to find.
+        """
+
         if self.data is None:
             return None
 
@@ -41,20 +59,50 @@ class BinaryTree:
         
 
     def replace(self, oldNode, newNode):
+        """
+        Replace a node in the tree.
+
+        Parameters:
+        -oldNode: The id (or node object) of the node you want to replace.
+        -newNode: The new node (node object) you want to replace the old node with.
+
+        oldNode and newNode MUST have the same id!
+        """
+
         if isinstance(oldNode, Human):
             oldNode = oldNode.id
-        
 
+        if oldNode != newNode.id:
+            return print("Old node and replacement must have the same ID! Use delete and insert to add/delete IDs.")
+
+        if self.find(oldNode) is None:
+            return print("Cannot delete node. Node does not exist. Use insert to add nodes.")
+
+        if oldNode < self.data.id:
+            self.left.replace(oldNode, newNode)
+        elif oldNode > self.data.id:
+            self.right.replace(oldNode, newNode)
+        else:
+            self.data = newNode
 
         
 
     def delete(self, node):
+        """
+        Delete a node from the tree.
+
+        Parameters:
+        -node: The node you want to delete (id or node object)
+        """
+
         if isinstance(node, Human):
             node = node.id
+        if self.find(node) is None:
+            return print("Cannot delete node. Node does not exist. Use insert to add nodes.")
 
-        if self.data.id > node:
+        if node < self.data.id:
             self.left = self.left.delete(node)
-        elif self.data.id < node:
+        elif node > self.data.id:
             self.right = self.right.delete(node)
         else:
             if self.right is None:
@@ -78,9 +126,18 @@ class BinaryTree:
 
 
     def insert(self, newData):
+        """
+        Insert a node into the tree.
+
+        Parameters:
+        -newData: The new node (node object) to insert.
+
+        The ID of newData CANNOT already be in the tree. 
+        """
+
         if self.find(newData.id) is not None:
             # raise CannotInsert(f"Duplication Error: '{newData.id} - {newData.name}' could not be inserted. There is already a node with this ID!")
-            return print(f"CannotInsert: There is already a node with an ID of {newData.id}")
+            return print(f"CannotInsert: There is already a node with the ID of {newData.id}")
 
         if self.data:
 
@@ -107,47 +164,17 @@ class BinaryTree:
     
 
     # Print the tree
-    def PrintTree(self):
+    def print_tree(self):
+        """Prints out the tree from left to right."""
+
         if self.data is None:
             return print("Empty Tree")
 
         
         if self.left is not None:
-            self.left.PrintTree()
+            self.left.print_tree()
 
-        print(f"---\nID: {self.data.id}\nNAME: {self.data.name}\nNICKNAME: {self.data.nickname}")
+        print(f"---ID: {self.data.id} | NAME: {self.data.name} | NICKNAME: {self.data.nickname}")
 
         if self.right is not None:
-            self.right.PrintTree()
-   
-    
-
-Caleb = Human(5, "Caleb", "clam")
-Grandpa = Human(8, "Grandpa", "bmw")
-Yana = Human(4, "Yana", "yoyoyana")
-Baba = Human(6, "Baba", "I can't think of a nickname for Baba")
-Mom = Human(11, "Mom", "Ma")
-Dad = Human(2, "Dad", "Da")
-
-
-
-people = BinaryTree()
-
-people.insert(Caleb)
-people.insert(Grandpa)
-people.insert(Yana)
-people.insert(Baba)
-people.insert(Mom)
-people.insert(Dad)
-
-print("Before:")
-people.PrintTree()
-people.delete(8)
-print("After:")
-people.PrintTree()
-
-result = people.find(int(input("ID to find: ")))
-if result is not None:
-    print(f"---\nID: {result.id}\nNAME: {result.name}\nNICKNAME: {result.nickname}")
-else:
-    print("Not found.")
+            self.right.print_tree()
