@@ -31,6 +31,8 @@ people.replace(8, Grandpa)
 print("----------\nAfter:")
 people.print_tree()
 
+print(f"---------\nLength: {people.length()}")
+
 
 
 # result = people.find(int(input("ID to find: ")))

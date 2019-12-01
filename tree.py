@@ -106,7 +106,7 @@ class BinaryTree:
         -node: The node you want to delete (id or node object)
         """
 
-        if isinstance(node, Human):
+        if isinstance(node, Human): # If the node is a human instance
             node = node.id
         if self.find(node) is None:
             raise NodeDoesNotExist(f"Cannot delete node. Node {node} does not exist. Use insert() to add new nodes")
@@ -174,6 +174,27 @@ class BinaryTree:
 
         else:
             self.data = newData
+
+    
+    def length(self):
+        """Returns length of tree (int)."""
+
+        if self.data is None:
+            return 0
+
+        if self.left is not None:
+            leftCounter = self.left.length()
+        else:
+            leftCounter = 0
+        
+        if self.right is not None:
+            rightCounter = self.right.length()
+        else:
+            rightCounter = 0
+
+        counter = leftCounter + 1 + rightCounter
+
+        return counter
     
 
     # Print the tree
