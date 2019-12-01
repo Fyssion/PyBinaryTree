@@ -5,11 +5,16 @@ class Human:
         self.name = name
         self.nickname = nickname
 
+
+# Create Error Types
 class DuplicateError(Exception):
+    """Raised when there is a duplicate of a node."""
     pass
 class NodeDoesNotExist(Exception):
+    """Raised when a node does not exist."""
     pass
-class ID_Error(Exception):
+class IDsDoNotMatch(Exception):
+    """Raised when two IDs do not match."""
     pass
 
 # BinaryTree class 
@@ -77,7 +82,7 @@ class BinaryTree:
             oldNode = oldNode.id
 
         if oldNode != newNode.id:
-            raise ID_Error(f"Cannot replace node. Old node and replacement must have the same ID. Use delete() and insert() to add/delete IDs.")
+            raise IDsDoNotMatch(f"Cannot replace node. Old node and replacement must have the same ID. Use delete() and insert() to add/delete IDs.")
             return print("Old node and replacement must have the same ID! Use delete and insert to add/delete IDs.")
 
         if self.find(oldNode) is None:
