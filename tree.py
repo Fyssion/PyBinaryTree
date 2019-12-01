@@ -1,4 +1,5 @@
 class Human:
+    """A human with attributes of id, name, and nickname."""
     def __init__(self, id, name, nickname):
         self.id = id
         self.name = name
@@ -38,25 +39,42 @@ class BinaryTree:
 
         return search
         
-        # OLD find() function
-        # search = None
 
-        # if self.data.id == id:
-        #     return self.data
+    def replace(self, oldNode, newNode):
+        if isinstance(oldNode, Human):
+            oldNode = oldNode.id
+        
 
-        # if self.left is not None:
-        #     if self.left.data.id == id:
-        #         return self.left.data
 
-        #     search = self.left.find(id)
+        
 
-        # if self.right is not None:
-        #     if self.right.data.id == id:
-        #         return self.right.data
-                
-        #     search = self.right.find(id)
+    def delete(self, node):
+        if isinstance(node, Human):
+            node = node.id
 
-        # return search
+        if self.data.id > node:
+            self.left = self.left.delete(node)
+        elif self.data.id < node:
+            self.right = self.right.delete(node)
+        else:
+            if self.right is None:
+                return self.left
+            if self.left is None:
+                return self.right
+            
+            temp_node = self.right
+            minimum_data = temp_node.data
+
+            while temp_node.left is not None:
+                temp_node = temp_node.left
+                minimum_data = temp_node.data
+            
+            self.data = minimum_data
+
+            self.right = self.right.delete(self.data)
+
+            return self
+
 
 
     def insert(self, newData):
@@ -122,10 +140,14 @@ people.insert(Baba)
 people.insert(Mom)
 people.insert(Dad)
 
+print("Before:")
+people.PrintTree()
+people.delete(8)
+print("After:")
 people.PrintTree()
 
 result = people.find(int(input("ID to find: ")))
-if result:
+if result is not None:
     print(f"---\nID: {result.id}\nNAME: {result.name}\nNICKNAME: {result.nickname}")
 else:
     print("Not found.")
