@@ -1,4 +1,5 @@
-from tree import BinaryTree, Human 
+from tree import BinaryTree, Human
+import tree
     
 
 
@@ -8,6 +9,7 @@ Yana = Human(4, "Yana", "yoyoyana")
 Baba = Human(6, "Baba", "I can't think of a nickname for Baba")
 Mom = Human(11, "Mom", "Ma")
 Dad = Human(2, "Dad", "Da")
+RandomPerson = Human(2, "Rando", "randoooo")
 
 
 
@@ -20,6 +22,7 @@ people.insert(Baba)
 people.insert(Mom)
 people.insert(Dad)
 
+people.insert(RandomPerson)
 
 
 print("----------\nBefore:")

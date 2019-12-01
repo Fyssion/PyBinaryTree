@@ -5,7 +5,11 @@ class Human:
         self.name = name
         self.nickname = nickname
 
-class CannotInsert(Exception):
+class DuplicateError(Exception):
+    pass
+class NodeDoesNotExist(Exception):
+    pass
+class ID_Error(Exception):
     pass
 
 # BinaryTree class 
@@ -73,10 +77,12 @@ class BinaryTree:
             oldNode = oldNode.id
 
         if oldNode != newNode.id:
+            raise ID_Error(f"Cannot replace node. Old node and replacement must have the same ID. Use delete() and insert() to add/delete IDs.")
             return print("Old node and replacement must have the same ID! Use delete and insert to add/delete IDs.")
 
         if self.find(oldNode) is None:
-            return print("Cannot delete node. Node does not exist. Use insert to add nodes.")
+            raise NodeDoesNotExist(f"Cannot replace node. Node {oldNode} does not exist. Use insert() to add new nodes")
+            return print("Cannot replace node. Node does not exist. Use insert to add nodes.")
 
         if oldNode < self.data.id:
             self.left.replace(oldNode, newNode)
@@ -98,6 +104,7 @@ class BinaryTree:
         if isinstance(node, Human):
             node = node.id
         if self.find(node) is None:
+            raise NodeDoesNotExist(f"Cannot delete node. Node {node} does not exist. Use insert() to add new nodes")
             return print("Cannot delete node. Node does not exist. Use insert to add nodes.")
 
         if node < self.data.id:
@@ -136,8 +143,9 @@ class BinaryTree:
         """
 
         if self.find(newData.id) is not None:
-            # raise CannotInsert(f"Duplication Error: '{newData.id} - {newData.name}' could not be inserted. There is already a node with this ID!")
-            return print(f"CannotInsert: There is already a node with the ID of {newData.id}")
+            # Raise a duplicate error
+            raise DuplicateError(f"There is already a node with the ID of {newData.id}")
+            return print(f"DuplicateError: There is already a node with the ID of {newData.id}")
 
         if self.data:
 
