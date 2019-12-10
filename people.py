@@ -2,31 +2,31 @@ from tree import BinaryTree, Human
     
 
 
-Caleb = Human(5, "Caleb", "clam")
-Grandpa = Human(8, "Grandpa", "bmw")
-Yana = Human(4, "Yana", "yoyoyana")
-Baba = Human(6, "Baba", "I can't think of a nickname for Baba")
-Mom = Human(11, "Mom", "Ma")
-Dad = Human(2, "Dad", "Da")
+Clam = Human(5, "Clam", "clam")
+Nator = Human(8, "Nator", "RoboNator")
+Robot = Human(4, "Robot", "Robot Clam")
+Nate = Human(6, "Nate", "Nathan")
+Dave = Human(11, "Dave", "David")
+Joe = Human(2, "Joe", "Joesef"")
 
 
 
 people = BinaryTree()
 
-people.insert(Caleb)
-people.insert(Grandpa)
-people.insert(Yana)
-people.insert(Baba)
-people.insert(Mom)
-people.insert(Dad)
+people.insert(Clam)
+people.insert(Nator)
+people.insert(Robot)
+people.insert(Nate)
+people.insert(Dave)
+people.insert(Joe)
 
 
 
 print("----------\nBefore:")
 people.print_tree()
 
-Grandpa.nickname = "Gramps" # Changing the name of Grandpa
-people.replace(8, Grandpa)
+Nator.nickname = "Robo.Nator" # Changing the name of Nator
+people.replace(8, Nator)
 
 print("----------\nAfter:")
 people.print_tree()
