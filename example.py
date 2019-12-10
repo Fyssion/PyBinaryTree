@@ -7,7 +7,7 @@ Nator = Human(8, "Nator", "RoboNator")
 Robot = Human(4, "Robot", "Robot Clam")
 Nate = Human(6, "Nate", "Nathan")
 Dave = Human(11, "Dave", "David")
-Joe = Human(2, "Joe", "Joesef"")
+Joe = Human(2, "Joe", "Joesef")
 
 
 
