@@ -54,6 +54,12 @@ This is less of an actual documentation and more of a way for me to learn how to
 
     Returns length of tree (int).
 
+#### `dist_to_farthest()`
+
+    Calculates the distance to the farthest node and returns it's data.
+        
+    Returns the distance and the farthest node's data.
+
 #### `print_tree()`
 
     Prints out the tree from left to right.

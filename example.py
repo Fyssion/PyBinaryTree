@@ -19,6 +19,7 @@ Robot = Human(4, "Robot", "Robot Clam")
 Nate = Human(6, "Nate", "Nathan")
 Dave = Human(11, "Dave", "David")
 Joe = Human(2, "Joe", "Joesef")
+Jake = Human(7, "Jake", "Jaycoobee")
 
 
 # Creating and initiating the BinaryTree
@@ -31,6 +32,7 @@ people.insert(Robot)
 people.insert(Nate)
 people.insert(Dave)
 people.insert(Joe)
+people.insert(Jake)
 
 
 # Printing the tree before and after replacing the data of a node
@@ -45,6 +47,10 @@ people.print_tree()
 
 # Printing the length of a tree
 print(f"---------\nLength: {people.length()}")
+
+# Finding the distance to the farthest node
+distance, data = people.dist_to_farthest()
+print(f"Distance to farthest node: {distance} | Corresponding ID: {data.id}")
 
 
 # Finding a node in the tree by ID

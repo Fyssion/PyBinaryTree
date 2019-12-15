@@ -194,6 +194,47 @@ class BinaryTree:
         counter = leftCounter + 1 + rightCounter
 
         return counter
+
+
+    def dist_to_farthest(self):
+        """
+        Calculates the distance to the farthest node and returns it's data.
+        
+        Returns the distance and the farthest node's data.
+        """
+
+        distance = 1
+
+        if self.right is not None:
+            rightDist, rightData = self.right.dist_to_farthest()
+        else:
+            rightDist = None
+
+        if self.left is not None:
+            leftDist, leftData = self.left.dist_to_farthest()
+        else:
+            leftDist = None
+
+        if rightDist is None or leftDist is None:
+
+            if rightDist is None and leftDist is None:
+                return 0, self.data # Returning 0 so the distance counts up from 0
+        
+            if rightDist is None:
+                distance += leftDist
+                return distance, leftData
+
+            elif leftDist is None:
+                distance += rightDist
+                return distance, rightData
+        
+        if rightDist > leftDist:
+            distance += rightDist
+            return distance, rightData
+        
+        else:
+            distance += leftDist
+            return distance, leftData
     
 
     # Print the tree
