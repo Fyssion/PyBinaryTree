@@ -1,11 +1,3 @@
-class Human:
-    """A human with attributes of id, name, and nickname."""
-    def __init__(self, id, name, nickname):
-        self.id = id
-        self.name = name
-        self.nickname = nickname
-
-
 # Create Error Types
 class DuplicateError(Exception):
     """Raised when there is a duplicate of a node."""
@@ -78,8 +70,11 @@ class BinaryTree:
         oldNode and newNode MUST have the same id!
         """
 
-        if isinstance(oldNode, Human):
-            oldNode = oldNode.id
+        if type(oldNode) != int:
+            try:
+                oldNode = oldNode.id
+            except AttributeError:
+                raise TypeError("Old node must be an int or an object with an 'id' variable.")
 
         if oldNode != newNode.id:
             raise IDsDoNotMatch(f"Cannot replace node. Old node and replacement must have the same ID. Use delete() and insert() to add/delete IDs.")
@@ -106,8 +101,12 @@ class BinaryTree:
         -node: The node you want to delete (id or node object)
         """
 
-        if isinstance(node, Human): # If the node is a human instance
-            node = node.id
+        if type(node) != int:
+            try:
+                node = node.id
+            except AttributeError:
+                raise TypeError("Node must be an int or an object with an 'id' variable.")
+
         if self.find(node) is None:
             raise NodeDoesNotExist(f"Cannot delete node. Node {node} does not exist. Use insert() to add new nodes")
             return print("Cannot delete node. Node does not exist. Use insert to add nodes.")
