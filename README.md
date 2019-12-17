@@ -18,7 +18,7 @@ This is less of an actual documentation and more of a way for me to learn how to
 
 `left` - The node to the left of the current node.
 
-**Right and left should not be set manually. Instead, see [insert()](https://github.com/incompetenator/PyBinaryTree#insertnewdata).**
+**Right and left should not be set manually. Instead, see [insert()](https://github.com/fyssion/PyBinaryTree#insertnewdata).**
 
 ### Functions
 
