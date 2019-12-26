@@ -24,7 +24,7 @@ class BinaryTree:
     def __init__(self):
         """Initiate the tree. Tree is empty until a node is inserted."""
 
-        self.data = None 
+        self.data = None
 
         self.right = None
         self.left = None  
@@ -132,7 +132,7 @@ class BinaryTree:
 
             self.right = self.right.delete(self.data)
 
-            return self
+        return self
 
 
 
@@ -235,7 +235,84 @@ class BinaryTree:
         else:
             distance += leftDist
             return distance, leftData
+
+
     
+    # def  queue_tree(self):
+    #     queue = []
+
+    #     queue.append(self.data)
+    #     if self.left:
+    #         queue.append(self.left.queue_tree())
+    #     else:
+    #         queue.append(None)
+    #     if self.right:
+    #         queue.append(self.right.queue_tree())
+    #     else:
+    #         queue.append(None)
+        
+    #     return queue
+
+
+
+
+    def disp_tree(self):
+        if self.data is None:
+            print("Empty Tree")
+            return
+        queue = []
+        tree = []
+        level = 0
+        queue.append(self)
+
+        allNotNone = True
+        while allNotNone and level  < 10:
+            tree.append("")
+            for i in range(2**level):
+                parentNode = queue.pop(0)
+                
+                if parentNode is None:
+                    tree[level] += "N "
+                    queue.append(None)
+                    queue.append(None)
+                    # print(f"PNode: None | Queue: {queue} | Level: {level}")
+                else:
+                    tree[level] += f"{parentNode.data.id} "
+                    queue.append(parentNode.left)
+                    queue.append(parentNode.right)
+                    # print(f"PNode: {parentNode.data.id} | Queue: {queue} | Level: {level}")
+
+            if all(item is None for item in queue):
+                allNotNone = False
+                # break
+            level += 1
+
+        # n = len(tree)
+        # for i in range(len(tree)):
+
+        #     n -= 1
+        #     for z in range((2**n)):
+        #         tree[i] = " " + tree[i]
+
+            # for n in range(len(tree)):
+            #     for z in range((2**i) // 2):
+            #         tree[i] = " " + tree[i]
+
+        print(tree)
+        print("\n".join(tree))
+
+
+            # queue.append(parentNode)
+            # if parentNode.left is None and parentNode.right is None:
+            #     allNotNone = False
+            #     break
+            # if parentNode.left is not None:
+            #     queue.append(parentNode.left)
+            # if parentNode.right is not None:
+            #     queue.append(parentNode.right)
+
+
+
 
     # Print the tree
     def print_tree(self):

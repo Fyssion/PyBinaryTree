@@ -52,10 +52,12 @@ print(f"---------\nLength: {people.length()}")
 distance, data = people.dist_to_farthest()
 print(f"Distance to farthest node: {distance} | Corresponding ID: {data.id}")
 
+people.disp_tree()
+
 
 # Finding a node in the tree by ID
-result = people.find(int(input("ID to find: ")))
-if result is not None:
-    print(f"---ID: {result.id} | NAME: {result.name} | NICKNAME: {result.nickname}")
-else:
-    print("Not found.")
+# result = people.find(int(input("ID to find: ")))
+# if result is not None:
+#     print(f"---ID: {result.id} | NAME: {result.name} | NICKNAME: {result.nickname}")
+# else:
+#     print("Not found.")
