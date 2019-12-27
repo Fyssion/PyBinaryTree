@@ -261,26 +261,27 @@ class BinaryTree:
             print("Empty Tree")
             return
         queue = []
-        tree = []
+        tree = {}
         level = 0
         queue.append(self)
 
         allNotNone = True
-        while allNotNone and level  < 10:
-            tree.append("")
+        while allNotNone and level  < 6:
+            tree[level] = []
             for i in range(2**level):
                 parentNode = queue.pop(0)
                 
                 if parentNode is None:
-                    tree[level] += "N "
+                    tree[level].append("_")
                     queue.append(None)
                     queue.append(None)
                     # print(f"PNode: None | Queue: {queue} | Level: {level}")
                 else:
-                    tree[level] += f"{parentNode.data.id} "
+                    tree[level].append(f"{parentNode.data.id}")
                     queue.append(parentNode.left)
                     queue.append(parentNode.right)
                     # print(f"PNode: {parentNode.data.id} | Queue: {queue} | Level: {level}")
+
 
             if all(item is None for item in queue):
                 allNotNone = False
@@ -298,8 +299,61 @@ class BinaryTree:
             #     for z in range((2**i) // 2):
             #         tree[i] = " " + tree[i]
 
-        print(tree)
-        print("\n".join(tree))
+
+        largestNumLength = 0
+        for i in range(len(tree)):
+            for x in range(len(tree[i])):
+                tempLength = len(tree[i][x])
+                if tempLength > largestNumLength:
+                    largestNumLength = tempLength
+        
+
+        def pad(string: str, padding: int):
+            if len(string) < padding:
+                for i in range(padding - len(string)):
+                    string += " "
+            return string
+
+        spacing = [1, 3, 7, 15, 31, 63, 124, 248, 496, 992]
+
+        # Formula that calculates the spacing list above
+        # num = 1
+        # spacing = [1]
+        # for i in range(9):
+        #     ans = num+num
+        #     num = ans
+        #     spacing.append(ans)
+
+        if largestNumLength == 1:
+            space = " "
+            spacingMulti = 2
+        elif largestNumLength == 2:
+            spacingMulti = 1
+            space = "  "
+        else:
+            print("Cannot print tree. IDs are more than two characters wide.")
+            return
+
+        n = len(tree) - 1
+        for i in range(len(tree)):
+            for v in range(len(tree[i])):
+                tree[i][v] = tree[i][v].rjust(largestNumLength)
+                for z in range(spacing[n]):
+                    tree[i][v] += space
+            n -= 1
+        output = ""
+        n = len(tree)
+        for i in range(len(tree)):
+            levelOut = f"{''.join(tree[i])}\n"
+            for z in range((2**n) // spacingMulti):
+                levelOut = " " + levelOut
+            output += levelOut
+            n -= 1
+
+        print(output)
+        dist, node = self.dist_to_farthest()
+        if dist > 5:
+            print("WARNING: ONLY PRINTED LEVELS 0-5")        # print("\n".join(tree))
 
 
             # queue.append(parentNode)
