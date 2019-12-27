@@ -272,7 +272,7 @@ class BinaryTree:
                 parentNode = queue.pop(0)
                 
                 if parentNode is None:
-                    tree[level].append("_")
+                    tree[level].append(" ")
                     queue.append(None)
                     queue.append(None)
                     # print(f"PNode: None | Queue: {queue} | Level: {level}")
@@ -314,13 +314,13 @@ class BinaryTree:
                     string += " "
             return string
 
-        spacing = [1, 3, 7, 15, 31, 63, 124, 248, 496, 992]
+        spacing = [1, 3, 7, 15, 31, 63, 124, 255, 511, 1023]
 
         # Formula that calculates the spacing list above
         # num = 1
         # spacing = [1]
         # for i in range(9):
-        #     ans = num+num
+        #     ans = num+num+1
         #     num = ans
         #     spacing.append(ans)
 
@@ -344,7 +344,9 @@ class BinaryTree:
         output = ""
         n = len(tree)
         for i in range(len(tree)):
-            levelOut = f"{''.join(tree[i])}\n"
+            levelOut = "".join(tree[i])
+            for z in range(n - 1):
+                levelOut += "\n"
             for z in range((2**n) // spacingMulti):
                 levelOut = " " + levelOut
             output += levelOut
