@@ -61,7 +61,7 @@ print(f"---------\nLength: {people.length()}")
 distance, data = people.dist_to_farthest()
 print(f"Distance to farthest node: {distance} | Corresponding ID: {data.id}")
 
-people.disp_tree()
+people.display()
 
 
 # Finding a node in the tree by ID

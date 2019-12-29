@@ -28,9 +28,14 @@ class BinaryTree:
 
         self.right = None
         self.left = None  
+        self.parent = None
 
+        # Aliases for functions
+        self.dist_to_farthest = self.depth
+        self.delete = self.remove
+        self.search = self.find
 
-    def find(self, id):
+    def find_node(self, id):
         """
         Find a node in the tree. Returns node or None if not found.
         
@@ -54,9 +59,13 @@ class BinaryTree:
             else:
                 return None
         if id == self.data.id:
-            search = self.data
+            search = self
 
         return search
+
+    def find(self, id):
+        """Same as find_node() but returns data instead of node itself."""
+        return self.find_node(id)
         
 
     def replace(self, oldNode, newNode):
@@ -65,7 +74,7 @@ class BinaryTree:
 
         Parameters:
         -oldNode: The id (or node object) of the node you want to replace.
-        -newNode: The new node (node object) you want to replace the old node with.
+        -newNode: The new node (data object) you want to replace the old node with.
 
         oldNode and newNode MUST have the same id!
         """
@@ -93,12 +102,12 @@ class BinaryTree:
 
         
 
-    def delete(self, node):
+    def remove(self, node):
         """
-        Delete a node from the tree.
+        Remove a node from the tree.
 
         Parameters:
-        -node: The node you want to delete (id or node object)
+        -node: The node you want to remove (id or data object)
         """
 
         if type(node) != int:
@@ -158,6 +167,7 @@ class BinaryTree:
 
                     self.left = BinaryTree()
                     self.left.insert(newData)
+                    self.left.parent = self
 
                 else:
                     self.left.insert(newData)
@@ -167,6 +177,7 @@ class BinaryTree:
 
                     self.right = BinaryTree()
                     self.right.insert(newData)
+                    self.right.parent = self
 
                 else:
                     self.right.insert(newData)
@@ -196,7 +207,7 @@ class BinaryTree:
         return counter
 
 
-    def dist_to_farthest(self):
+    def depth(self):
         """
         Calculates the distance to the farthest node and returns it's data.
         
@@ -256,7 +267,7 @@ class BinaryTree:
 
 
 
-    def disp_tree(self):
+    def display(self):
         if self.data is None:
             print("Empty Tree")
             return
