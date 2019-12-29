@@ -8,13 +8,15 @@ class NodeDoesNotExist(Exception):
 class IDsDoNotMatch(Exception):
     """Raised when two IDs do not match."""
     pass
+class EmptyTreeError(Exception):
+    """Raised when the Tree is Empty"""
 
 # BinaryTree class 
-class BinaryTree: 
+class Node: 
     """
-    Binary Tree that contains nodes.
+    A node in a Binary Tree.
 
-    Once initiated, the binary tree remains empty until a node is inserted.
+    Once initiated, the node remains empty until a node is inserted.
     A node is inserted/sorted with its ID.
 
     You can insert, delete, replace, or find a node in the binary tree.
@@ -30,10 +32,17 @@ class BinaryTree:
         self.left = None  
         self.parent = None
 
-        # Aliases for functions
+        self.add_aliases()
+
+    def add_aliases(self):
+        """
+        NOT TO BE USED (other than in the __init__ function)!
+        Seperate function that adds aliases to functions.
+        """
         self.dist_to_farthest = self.depth
         self.delete = self.remove
         self.search = self.find
+
 
     def find_node(self, id):
         """
@@ -165,7 +174,7 @@ class BinaryTree:
             if newData.id < self.data.id:
                 if self.left is None:
 
-                    self.left = BinaryTree()
+                    self.left = Node()
                     self.left.insert(newData)
                     self.left.parent = self
 
@@ -175,7 +184,7 @@ class BinaryTree:
             elif newData.id > self.data.id:
                 if self.right is None:
 
-                    self.right = BinaryTree()
+                    self.right = Node()
                     self.right.insert(newData)
                     self.right.parent = self
 
@@ -396,3 +405,57 @@ class BinaryTree:
 
         if self.right is not None:
             self.right.print_tree()
+
+class BinaryTree(Node):
+    """
+    This absolute piece of trash is my lazy approach to making a better tree.
+    
+    I'll rewrie it soon. I hope.
+    """
+    def __init__(self):
+        self.root = None
+        
+        self.add_aliases()
+
+    def find_node(self, id):
+        if self.root is not None:
+            return self.root.find_node(id)
+
+    def find(self, id):
+        """Same as find_node() but returns data instead of node itself."""
+        return self.find_node(id)
+
+    def insert(self, newData):
+        if self.root is not None:
+            self.root.insert(newData)
+        else:
+            self.root = Node()
+            self.root.insert(newData)
+
+    def remove(self, node):
+        if self.root is not None:
+            self.root.remove(node)
+        else:
+            raise EmptyTreeError("Tree is empty. There is nothing to remove.")
+
+    def replace(self, oldData, newData):
+        if self.root is not None:
+            self.root.replace(oldData, newData)
+        else:
+            raise EmptyTreeError("Tree is empty. There is nothing to replace.")
+
+    def length(self):
+        if self.root is not None:
+            return self.root.length()
+
+    def depth(self):
+        if self.root is not None:
+            return self.root.depth()
+
+    def display(self):
+        if self.root is not None:
+            self.root.display()
+    
+    def print_tree(self):
+        if self.root is not None:
+            self.root.print_tree()
