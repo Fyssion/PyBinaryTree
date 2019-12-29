@@ -2,7 +2,13 @@
 
 Personal project to learn how binary trees work.
 
-## Documentation
+## Documentation (OUTDATED)
+
+**^^ Working on making self-updating documentation or whatever. Make the computer do it for me.**
+
+**If you want documentation (I cannot possibly imagine why), the actual tree.py file itself is kept somewhat up-to-date.**
+
+## Original Documentation::
 
 This is less of an actual documentation and more of a way for me to learn how to write good documentation.
 
