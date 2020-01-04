@@ -1,6 +1,6 @@
 if __name__ == "__main__":
 
-    from tree import BinaryTree
+    from bintree import BinaryTree
 
 
     # Creating a Human class to store data.
