@@ -293,7 +293,6 @@ class Node:
                     queue.append(parentNode.right)
                     # print(f"PNode: {parentNode.data.id} | Queue: {queue} | Level: {level}")
 
-
             if all(item is None for item in queue):
                 allNotNone = False
                 # break
