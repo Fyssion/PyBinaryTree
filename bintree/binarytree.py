@@ -13,6 +13,7 @@ class IDsDoNotMatch(Exception):
 
 class EmptyTreeError(Exception):
     """Raised when the Tree is Empty"""
+    pass
 
 
 class Node:
