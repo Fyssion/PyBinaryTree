@@ -2,7 +2,6 @@ if __name__ == "__main__":
 
     from bintree import BinaryTree
 
-
     # Creating a Human class to store data.
     # Remember to include an ID variable when creating your own class.
     class Human:
@@ -16,7 +15,6 @@ if __name__ == "__main__":
         def __init__(self, id):
             self.id = id
 
-
     list_of_IDs = [5, 8, 4, 6, 11, 2, 7, 9, 25, 14, 3, 1, 36, 51, 52]
 
     # Human(id, name, nickname)
@@ -28,7 +26,6 @@ if __name__ == "__main__":
     Dave = Human(11, "Dave")
     Joe = Human(2, "Joe")
     Jake = Human(7, "Jake")
-
 
     # Creating and initiating the BinaryTree
     people = BinaryTree()
@@ -44,7 +41,6 @@ if __name__ == "__main__":
     # people.insert(Dave)
     # people.insert(Joe)
     # people.insert(Jake)
-
 
     # Printing the tree before and after replacing the data of a node
     # print("----------\nBefore:")
@@ -64,7 +60,6 @@ if __name__ == "__main__":
     print(f"Distance to farthest node: {distance} | Corresponding ID: {data.id}")
 
     people.display()
-
 
     # Finding a node in the tree by ID
     # result = people.find(int(input("ID to find: ")))

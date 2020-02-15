@@ -2,17 +2,20 @@
 class DuplicateError(Exception):
     """Raised when there is a duplicate of a node."""
     pass
+
 class NodeDoesNotExist(Exception):
     """Raised when a node does not exist."""
     pass
+
 class IDsDoNotMatch(Exception):
     """Raised when two IDs do not match."""
     pass
+
 class EmptyTreeError(Exception):
     """Raised when the Tree is Empty"""
 
-# BinaryTree class 
-class Node: 
+
+class Node:
     """
     A node in a Binary Tree.
 
@@ -22,19 +25,19 @@ class Node:
     You can insert, delete, replace, or find a node in the binary tree.
     You can print the entire binary tree from left to right with print_tree().
     """
-   
+
     def __init__(self):
         """Initiate the tree. Tree is empty until a node is inserted."""
 
         self.data = None
 
         self.right = None
-        self.left = None  
+        self.left = None
         self.parent = None
 
-        self.add_aliases()
+        self._add_aliases()
 
-    def add_aliases(self):
+    def _add_aliases(self):
         """
         NOT TO BE USED (other than in the __init__ function)!
         Seperate function that adds aliases to functions.
@@ -43,11 +46,10 @@ class Node:
         self.delete = self.remove
         self.search = self.find
 
-
     def find_node(self, id):
         """
         Find a node in the tree. Returns node or None if not found.
-        
+
         Parameters:
         -ID: The ID of the node you want to find.
         """
@@ -74,8 +76,7 @@ class Node:
 
     def find(self, id):
         """Same as find_node() but returns data instead of node itself."""
-        return self.find_node(id)
-        
+        return self.find_node(id).data
 
     def replace(self, oldNode, newNode):
         """
@@ -109,8 +110,6 @@ class Node:
         else:
             self.data = newNode
 
-        
-
     def remove(self, node):
         """
         Remove a node from the tree.
@@ -138,21 +137,19 @@ class Node:
                 return self.left
             if self.left is None:
                 return self.right
-            
+
             temp_node = self.right
             minimum_data = temp_node.data
 
             while temp_node.left is not None:
                 temp_node = temp_node.left
                 minimum_data = temp_node.data
-            
+
             self.data = minimum_data
 
             self.right = self.right.delete(self.data)
 
         return self
-
-
 
     def insert(self, newData):
         """
@@ -161,7 +158,7 @@ class Node:
         Parameters:
         -newData: The new node (node object) to insert.
 
-        The ID of newData CANNOT already be in the tree. 
+        The ID of newData CANNOT already be in the tree.
         """
 
         if self.find(newData.id) is not None:
@@ -180,7 +177,7 @@ class Node:
 
                 else:
                     self.left.insert(newData)
-            
+
             elif newData.id > self.data.id:
                 if self.right is None:
 
@@ -194,7 +191,6 @@ class Node:
         else:
             self.data = newData
 
-    
     def length(self):
         """Returns length of tree (int)."""
 
@@ -205,7 +201,7 @@ class Node:
             leftCounter = self.left.length()
         else:
             leftCounter = 0
-        
+
         if self.right is not None:
             rightCounter = self.right.length()
         else:
@@ -215,11 +211,10 @@ class Node:
 
         return counter
 
-
     def depth(self):
         """
         Calculates the distance to the farthest node and returns it's data.
-        
+
         Returns the distance and the farthest node's data.
         """
 
@@ -239,7 +234,7 @@ class Node:
 
             if rightDist is None and leftDist is None:
                 return 0, self.data # Returning 0 so the distance counts up from 0
-        
+
             if rightDist is None:
                 distance += leftDist
                 return distance, leftData
@@ -247,17 +242,15 @@ class Node:
             elif leftDist is None:
                 distance += rightDist
                 return distance, rightData
-        
+
         if rightDist > leftDist:
             distance += rightDist
             return distance, rightData
-        
+
         else:
             distance += leftDist
             return distance, leftData
 
-
-    
     # def  queue_tree(self):
     #     queue = []
 
@@ -270,11 +263,8 @@ class Node:
     #         queue.append(self.right.queue_tree())
     #     else:
     #         queue.append(None)
-        
+
     #     return queue
-
-
-
 
     def display(self):
         if self.data is None:
@@ -290,7 +280,7 @@ class Node:
             tree[level] = []
             for i in range(2**level):
                 parentNode = queue.pop(0)
-                
+
                 if parentNode is None:
                     tree[level].append(" ")
                     queue.append(None)
@@ -319,14 +309,12 @@ class Node:
             #     for z in range((2**i) // 2):
             #         tree[i] = " " + tree[i]
 
-
         largestNumLength = 0
         for i in range(len(tree)):
             for x in range(len(tree[i])):
                 tempLength = len(tree[i][x])
                 if tempLength > largestNumLength:
                     largestNumLength = tempLength
-        
 
         def pad(string: str, padding: int):
             if len(string) < padding:
@@ -377,7 +365,6 @@ class Node:
         if dist > 5:
             print("WARNING: ONLY PRINTED LEVELS 0-5")        # print("\n".join(tree))
 
-
             # queue.append(parentNode)
             # if parentNode.left is None and parentNode.right is None:
             #     allNotNone = False
@@ -387,17 +374,12 @@ class Node:
             # if parentNode.right is not None:
             #     queue.append(parentNode.right)
 
-
-
-
-    # Print the tree
     def print_tree(self):
         """Prints out the tree from left to right."""
 
         if self.data is None:
             return print("Empty Tree")
 
-        
         if self.left is not None:
             self.left.print_tree()
 
@@ -406,16 +388,17 @@ class Node:
         if self.right is not None:
             self.right.print_tree()
 
+
 class BinaryTree(Node):
     """
     This absolute piece of trash is my lazy approach to making a better tree.
-    
+
     I'll rewrie it soon. I hope.
     """
     def __init__(self):
         self.root = None
-        
-        self.add_aliases()
+
+        self._add_aliases()
 
     def find_node(self, id):
         if self.root is not None:
@@ -455,7 +438,7 @@ class BinaryTree(Node):
     def display(self):
         if self.root is not None:
             self.root.display()
-    
+
     def print_tree(self):
         if self.root is not None:
             self.root.print_tree()
